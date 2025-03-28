@@ -1,0 +1,31 @@
+&i2c1 {
+    status = "okay";
+    compatible = "nordic,nrf-twim";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    max77643: max77643@48 {
+        reg = <0x48>;
+        status = "okay";
+        regulators {
+            compatible = "adi,max77643-regulator";
+            SBB0 {
+                regulator-boot-on;
+                regulator-min-microvolt = <500000>;   // 0.5V
+                regulator-max-microvolt = <5500000>;  // 5.5V
+            };
+            SBB1 {
+                regulator-boot-on;
+                regulator-min-microvolt = <500000>;   // 0.5V
+                regulator-max-microvolt = <5500000>;  // 5.5V
+            };
+            SBB2 {
+                regulator-boot-on;
+                regulator-min-microvolt = <500000>;   // 0.5V
+                regulator-max-microvolt = <5500000>;  // 5.5V
+            };
+        };
+    };
+};
