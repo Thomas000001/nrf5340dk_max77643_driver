@@ -1,0 +1,49 @@
+# Copyright (c), 2023 Your Company
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  Maxim MAX77643 PMIC
+
+  The PMIC has one LDO regulator and three SBB regulators. All need to be defined as
+  children nodes, strictly following the LDO0, SBB0, SBB1, SBB2 node names. For
+  example:
+
+  pmic@48 {
+    reg = <0x48>;
+    ...
+    regulators {
+      compatible = "adi,max77643-regulator";
+
+      LDO0 {
+        regulator-min-microvolt = <1800000>;
+        regulator-max-microvolt = <3300000>;
+      };
+      SBB0 {
+        regulator-min-microvolt = <500000>;
+        regulator-max-microvolt = <1500000>;
+      };
+      SBB1 {
+        regulator-min-microvolt = <500000>;
+        regulator-max-microvolt = <1500000>;
+      };
+      SBB2 {
+        regulator-min-microvolt = <500000>;
+        regulator-max-microvolt = <1500000>;
+      };
+    };
+  };
+
+compatible: "adi,max77643-regulator"
+
+include: base.yaml
+
+child-binding:
+  include:
+    - name: regulator.yaml
+      property-allowlist:
+        - regulator-always-on
+        - regulator-boot-on
+        - regulator-min-microvolt
+        - regulator-max-microvolt
+        - regulator-allowed-modes
+        - regulator-initial-mode
